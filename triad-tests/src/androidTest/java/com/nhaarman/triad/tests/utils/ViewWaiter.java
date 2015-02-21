@@ -7,7 +7,7 @@ import org.jetbrains.annotations.NotNull;
 public class ViewWaiter {
 
   public static void waitUntil(@NotNull final Condition condition) throws InterruptedException {
-    waitUntil(condition, 5000);
+    waitUntil(condition, 10000);
   }
 
   public static void waitUntil(@NotNull final Condition condition, final long timeoutMs) throws InterruptedException {
