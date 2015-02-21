@@ -4,6 +4,7 @@ import com.nhaarman.triad.TestActivityInstrumentationTestCase;
 import com.nhaarman.triad.tests.firstdialog.FirstDialogScreen;
 import com.nhaarman.triad.tests.seconddialog.SecondDialogScreen;
 
+import static com.nhaarman.triad.tests.utils.ViewWaiter.viewHasAlpha;
 import static com.nhaarman.triad.tests.utils.ViewWaiter.viewNotPresent;
 import static com.nhaarman.triad.tests.utils.ViewWaiter.viewVisible;
 import static com.nhaarman.triad.tests.utils.ViewWaiter.waitUntil;
@@ -37,6 +38,7 @@ public class DoubleBackwardSecondDialogTransitionTest extends TestActivityInstru
     });
 
     waitUntil(viewNotPresent(mDialogHolder, R.id.view_dialog_first));
+    waitUntil(viewHasAlpha(mDimmerView, 0f));
   }
 
   public void test_afterTransition_secondDialogIsNotPresent() {
