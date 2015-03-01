@@ -79,6 +79,7 @@ public class NotesListView extends RelativeLayoutContainer<NotesListPresenter, N
       if (noteContainer == null) {
         noteContainer = (NoteContainer) LayoutInflater.from(getContext()).inflate(R.layout.view_note, parent, false);
         noteContainer.setPresenter(new NotePresenter());
+        noteContainer.getPresenter().acquire(noteContainer);
       }
 
       noteContainer.getPresenter().setNote(getItem(position));
