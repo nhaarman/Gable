@@ -84,6 +84,12 @@ public abstract class TriadActivity<M> extends Activity {
   protected abstract Screen<?, ?, M> createInitialScreen();
 
   @Override
+  protected void onStart() {
+    super.onStart();
+    mTriadPresenter.onStart();
+  }
+
+  @Override
   protected void onPostCreate(final Bundle savedInstanceState) {
     super.onPostCreate(savedInstanceState);
     Backstack backstack = mFlow.getBackstack();
@@ -102,6 +108,12 @@ public abstract class TriadActivity<M> extends Activity {
     for (Screen screen : screens) {
       mTriadPresenter.showScreen(screen, Flow.Direction.FORWARD);
     }
+  }
+
+  @Override
+  protected void onStop() {
+    super.onStop();
+    mTriadPresenter.onStop();
   }
 
   @Override

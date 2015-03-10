@@ -2,6 +2,7 @@ package com.nhaarman.triad;
 
 import android.view.View;
 import android.view.ViewGroup;
+import com.nhaarman.triad.container.Container;
 import com.nhaarman.triad.container.ScreenContainer;
 import com.nhaarman.triad.presenter.Presenter;
 import com.nhaarman.triad.presenter.ScreenPresenter;
@@ -128,6 +129,27 @@ class TriadPresenter<M> extends Presenter<TriadPresenter<M>, TriadContainer<M>> 
 
   public void onDimmerClicked() {
     onBackPressed();
+  }
+
+  public <P extends ScreenPresenter<P, C>, C extends ScreenContainer<P, C>> void onStart() {
+    if (mScreens.empty()) {
+      return;
+    }
+
+    Screen<P, C, M> screen = (Screen<P, C, M>) mScreens.peek();
+    P presenter = screen.getPresenter(mMainComponent);
+    C container = (C) mScreenContainers.peek();
+    presenter.acquire(container);
+  }
+
+  public void onStop() {
+    if (mScreens.empty()) {
+      return;
+    }
+
+    Screen<?, ?, M> screen = mScreens.peek();
+    ScreenPresenter<?, ?> presenter = screen.getPresenter(mMainComponent);
+    presenter.releaseContainer();
   }
 }
 

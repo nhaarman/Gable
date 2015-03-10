@@ -24,7 +24,15 @@ public class Presenter<P extends Presenter<P, C>, C extends Container<P, C>> {
    *
    * @param container The {@link C} to gain control over.
    */
-  public final void acquire(@NotNull final C container) {
+  public  void acquire(@NotNull final C container) {
+    if (container.equals(mContainer)) {
+      return;
+    }
+
+    if (mContainer != null) {
+      onControlLost();
+    }
+
     mContainer = container;
     onControlGained(container);
   }
@@ -33,7 +41,7 @@ public class Presenter<P extends Presenter<P, C>, C extends Container<P, C>> {
    * Releases the {@link C} this {@code Presenter} controls, and calls {@link #onControlLost()}
    * to notify implementers of this class that the {@link C} is no longer available.
    */
-  public final void releaseContainer() {
+  public  void releaseContainer() {
     mContainer = null;
     onControlLost();
   }

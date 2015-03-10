@@ -10,6 +10,7 @@ import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.reset;
 
 @SuppressWarnings("AccessingNonPublicFieldOfAnotherObject")
 public class PresenterTest {
@@ -77,5 +78,39 @@ public class PresenterTest {
     /* Then */
     assertThat(mPresenter.onControlLostCalled, is(true));
     assertThat(mPresenter.onControlGainedCalled, is(false));
+  }
+
+  @Test
+  public void acquiringTheSameContainerTwice_doesNothing() {
+    /* Given */
+    TestRelativeLayoutContainer container = mock(TestRelativeLayoutContainer.class);
+    mPresenter.acquire(container);
+    mPresenter.onControlLostCalled = false;
+    mPresenter.onControlGainedCalled = false;
+
+    /* When */
+    mPresenter.acquire(container);
+
+    /* Then */
+    assertThat(mPresenter.onControlLostCalled, is(false));
+    assertThat(mPresenter.onControlGainedCalled, is(false));
+  }
+
+  @Test
+  public void acquiringAnotherContainer_firstReleasesTheCurrentContainer() {
+    /* Given */
+    TestRelativeLayoutContainer container1 = mock(TestRelativeLayoutContainer.class);
+    TestRelativeLayoutContainer container2 = mock(TestRelativeLayoutContainer.class);
+
+    mPresenter.acquire(container1);
+    mPresenter.onControlLostCalled = false;
+    mPresenter.onControlGainedCalled = false;
+
+    /* When */
+    mPresenter.acquire(container2);
+
+    /* Then */
+    assertThat(mPresenter.onControlLostCalled, is(true));
+    assertThat(mPresenter.onControlGainedCalled, is(true));
   }
 }

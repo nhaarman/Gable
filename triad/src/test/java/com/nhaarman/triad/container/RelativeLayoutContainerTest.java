@@ -22,7 +22,7 @@ public class RelativeLayoutContainerTest {
   }
 
   @Test(expected = NullPointerException.class)
-  public void intially_getPresenterThrowsANullPointerException() {
+  public void initially_getPresenterThrowsANullPointerException() {
     mRelativeLayoutContainer.getPresenter();
   }
 
