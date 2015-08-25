@@ -4,8 +4,15 @@ android {
   testOptions {
     unitTests.returnDefaultValues = true
   }
-}
 
+  lintOptions {
+    lintConfig file("lint.xml")
+    textReport true
+    textOutput 'stdout'
+    warningsAsErrors true
+    abortOnError true
+  }
+}
 
 apply from: rootProject.projectDir.absolutePath + '/gradle/compile.gradle';
 apply from: rootProject.projectDir.absolutePath + '/gradle/publishing.gradle'
@@ -16,10 +23,10 @@ dependencies {
   compile project(':triad')
 
   /*  AppCompat v7 */
-  compile 'com.android.support:appcompat-v7:22.2.0'
+  compile 'com.android.support:appcompat-v7:23.0.0'
 
   /* Annotations library */
-  provided 'com.android.support:support-annotations:22.2.0'
+  provided 'com.android.support:support-annotations:23.0.0'
 
   /* Tests */
   testCompile 'junit:junit:4.12'

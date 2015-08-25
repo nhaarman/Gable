@@ -6,7 +6,7 @@ dependencies {
   provided 'javax.inject:javax.inject:1@jar'
 
   /* Annotations library */
-  provided 'com.android.support:support-annotations:22.2.0'
+  provided 'com.android.support:support-annotations:23.0.0'
 
   /* Tests */
   testCompile 'junit:junit:4.12'

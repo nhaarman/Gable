@@ -16,6 +16,8 @@
 
 package com.nhaarman.triad;
 
+import org.jetbrains.annotations.NonNls;
+
 @SuppressWarnings("BooleanParameter")
 final class Preconditions {
 
@@ -31,7 +33,7 @@ final class Preconditions {
    *
    * @throws NullPointerException if {@code reference} is null
    */
-  static <T> T checkNotNull(final T reference, final String errorMessage, final Object... args) {
+  static <T> T checkNotNull(final T reference, @NonNls final String errorMessage, @NonNls final Object... args) {
     if (reference == null) {
       throw new NullPointerException(String.format(errorMessage, args));
     }
@@ -42,13 +44,13 @@ final class Preconditions {
   /**
    * @throws IllegalArgumentException if condition is false.
    */
-  static void checkArgument(final boolean condition, final String errorMessage, final Object... args) {
+  static void checkArgument(final boolean condition, @NonNls final String errorMessage, @NonNls final Object... args) {
     if (!condition) {
       throw new IllegalArgumentException(String.format(errorMessage, args));
     }
   }
 
-  static void checkState(final boolean expression, final String errorMessage, final Object... args) {
+  static void checkState(final boolean expression, @NonNls final String errorMessage, @NonNls final Object... args) {
     if (!expression) {
       throw new IllegalStateException(String.format(errorMessage, args));
     }

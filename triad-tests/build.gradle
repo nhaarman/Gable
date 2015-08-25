@@ -14,7 +14,7 @@ dependencies {
   compile project(':triad')
 
   /* Annotations library */
-  provided 'com.android.support:support-annotations:22.2.0'
+  provided 'com.android.support:support-annotations:23.0.0'
 
   /* Tests */
   androidTestCompile 'com.android.support.test.espresso:espresso-core:2.0'

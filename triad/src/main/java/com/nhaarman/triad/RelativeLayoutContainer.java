@@ -47,6 +47,11 @@ public abstract class RelativeLayoutContainer<
   @Nullable
   private ActivityComponent mActivityComponent;
 
+  /**
+   * Whether we're attached to the window.
+   */
+  private boolean mAttachedToWindow;
+
   public RelativeLayoutContainer(final Context context) {
     super(context);
   }
@@ -86,6 +91,10 @@ public abstract class RelativeLayoutContainer<
   public void setPresenterAndActivityComponent(@NonNull final P presenter, @NonNull final ActivityComponent activityComponent) {
     mPresenter = presenter;
     mActivityComponent = activityComponent;
+
+    if (mAttachedToWindow) {
+      acquire();
+    }
   }
 
   @NonNull
@@ -110,6 +119,8 @@ public abstract class RelativeLayoutContainer<
   @Override
   protected void onAttachedToWindow() {
     super.onAttachedToWindow();
+    mAttachedToWindow = true;
+
     if (isInEditMode()) {
       return;
     }
@@ -124,6 +135,8 @@ public abstract class RelativeLayoutContainer<
   @Override
   protected void onDetachedFromWindow() {
     super.onDetachedFromWindow();
+    mAttachedToWindow = false;
+
     getPresenter().releaseContainer();
   }
 }

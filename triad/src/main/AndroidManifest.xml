@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright 2015 Niek Haarman
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,8 +14,4 @@
   ~ limitations under the License.
   -->
 
-<manifest package="com.nhaarman.triad">
-
-  <application />
-
-</manifest>
+<manifest package="com.nhaarman.triad" />
