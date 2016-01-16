@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Niek Haarman
+ * Copyright 2016 Niek Haarman
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,6 +20,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.support.annotation.NonNull;
+import com.nhaarman.triad.ActivityComponentProvider;
+import com.nhaarman.triad.Presenter;
+import com.nhaarman.triad.ScreenProvider;
 
 /**
  * An utility class that retrieves the ActivityComponent and Presenter using a Context instance.

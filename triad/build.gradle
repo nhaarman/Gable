@@ -6,6 +6,8 @@ apply from: rootProject.projectDir.absolutePath + '/gradle/bintray.gradle'
 apply from: rootProject.projectDir.absolutePath + '/gradle/artifactory.gradle'
 
 dependencies {
+  compile project(':triad-core')
+
   compile "com.jakewharton:butterknife:$butterKnifeVersion"
 
   provided "com.android.support:support-annotations:$androidSupportVersion"

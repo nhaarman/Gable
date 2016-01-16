@@ -1,0 +1,36 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+buildscript {
+  repositories {
+    mavenCentral()
+  }
+  dependencies {
+    classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+  }
+}
+
+android {
+  sourceSets {
+    main.java.srcDirs += 'src/main/kotlin'
+    test.java.srcDirs += 'src/test/kotlin'
+  }
+}
+
+dependencies {
+  compile project(':triad-kotlin')
+
+  compile "com.android.support:appcompat-v7:$androidSupportVersion"
+
+  provided "com.android.support:support-annotations:$androidSupportVersion"
+
+  /* Tests */
+  testCompile "junit:junit:$junitVersion"
+  testCompile "org.hamcrest:hamcrest-all:$hamcrestVersion"
+  testCompile "org.mockito:mockito-core:$mockitoVersion"
+}
+
+apply from: rootProject.projectDir.absolutePath + '/gradle/compile.gradle';
+apply from: rootProject.projectDir.absolutePath + '/gradle/publishing.gradle'
+apply from: rootProject.projectDir.absolutePath + '/gradle/bintray.gradle'
+apply from: rootProject.projectDir.absolutePath + '/gradle/artifactory.gradle'

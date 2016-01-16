@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Niek Haarman
+ * Copyright 2016 Niek Haarman
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -69,123 +69,123 @@ public class EditExistingNotePresenterTest {
         doReturn(Optional.of(mock(Resources.class))).when(mEditNotePresenter).resources();
 
         mEditNoteContainerMock = mock(EditNoteContainer.class);
-        when(mEditNoteContainerMock.getContext()).thenReturn(mock(Context.class));
+        when(mEditNoteContainerMock.context()).thenReturn(mock(Context.class));
     }
 
     @Test
     public void onControlGained_setsNoteTitleToEditNoteContainer() {
-    /* Given */
+        /* Given */
         EditNoteContainer containerMock = mock(EditNoteContainer.class);
         ActivityComponent activityComponentMock = mock(ActivityComponent.class);
 
-    /* When */
+        /* When */
         mEditNotePresenter.onControlGained(containerMock, activityComponentMock);
 
-    /* Then */
+        /* Then */
         verify(containerMock).setTitle(TITLE);
     }
 
     @Test
     public void onControlGained_setsNoteContentsToEditNoteContainer() {
-    /* Given */
+        /* Given */
         EditNoteContainer containerMock = mock(EditNoteContainer.class);
         ActivityComponent activityComponentMock = mock(ActivityComponent.class);
 
-    /* When */
+        /* When */
         mEditNotePresenter.onControlGained(containerMock, activityComponentMock);
 
-    /* Then */
+        /* Then */
         verify(containerMock).setContents(CONTENTS);
     }
 
     @Test
     public void onSaveNoteClicked_validatesTitle() {
-    /* Given */
+        /* Given */
         mEditNotePresenter.setContainer(mEditNoteContainerMock);
 
         when(mEditNoteContainerMock.getTitle()).thenReturn(TITLE);
         when(mEditNoteContainerMock.getContents()).thenReturn(CONTENTS);
 
-    /* When */
+        /* When */
         mEditNotePresenter.onSaveNoteClicked();
 
-    /* Then */
+        /* Then */
         verify(mNoteValidator).validateTitle(TITLE);
     }
 
     @Test
     public void onSaveNoteClicked_validatesContents() {
-    /* Given */
+        /* Given */
         mEditNotePresenter.setContainer(mEditNoteContainerMock);
 
         when(mEditNoteContainerMock.getTitle()).thenReturn(TITLE);
         when(mEditNoteContainerMock.getContents()).thenReturn(CONTENTS);
 
-    /* When */
+        /* When */
         mEditNotePresenter.onSaveNoteClicked();
 
-    /* Then */
+        /* Then */
         verify(mNoteValidator).validateContents(CONTENTS);
     }
 
     @Test
     public void onSaveNoteClickedWithEmptyTitle_showsErrorMessage() {
-    /* Given */
+        /* Given */
         mEditNotePresenter.setContainer(mEditNoteContainerMock);
 
         when(mEditNoteContainerMock.getTitle()).thenReturn("");
         when(mEditNoteContainerMock.getContents()).thenReturn(CONTENTS);
 
-    /* When */
+        /* When */
         mEditNotePresenter.onSaveNoteClicked();
 
-    /* Then */
+        /* Then */
         verify(mEditNoteContainerMock).setTitleError(any(String.class));
     }
 
     @Test
     public void onSaveNoteClickedWithEmptyContents_showsErrorMessage() {
-    /* Given */
+        /* Given */
         mEditNotePresenter.setContainer(mEditNoteContainerMock);
 
         when(mEditNoteContainerMock.getTitle()).thenReturn(TITLE);
         when(mEditNoteContainerMock.getContents()).thenReturn("");
 
-    /* When */
+        /* When */
         mEditNotePresenter.onSaveNoteClicked();
 
-    /* Then */
+        /* Then */
         verify(mEditNoteContainerMock).setContentsError(any(String.class));
     }
 
     @Test
     public void onSaveNoteClicked_persistsTheNote() {
-    /* Given */
+        /* Given */
         mEditNotePresenter.setContainer(mEditNoteContainerMock);
 
         when(mEditNoteContainerMock.getTitle()).thenReturn(TITLE);
         when(mEditNoteContainerMock.getContents()).thenReturn(CONTENTS);
 
-    /* When */
+        /* When */
         mEditNotePresenter.onSaveNoteClicked();
 
-    /* Then */
+        /* Then */
         verify(mNoteRepository).update(mNote);
     }
 
     @Test
     public void onSaveNoteClicked_navigatesBack() {
-    /* Given */
+        /* Given */
         EditNoteContainer containerMock = mock(EditNoteContainer.class);
         mEditNotePresenter.setContainer(containerMock);
 
         when(containerMock.getTitle()).thenReturn(TITLE);
         when(containerMock.getContents()).thenReturn(CONTENTS);
 
-    /* When */
+        /* When */
         mEditNotePresenter.onSaveNoteClicked();
 
-    /* Then */
+        /* Then */
         verify(mTriad).goBack();
     }
 }

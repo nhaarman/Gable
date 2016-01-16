@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Niek Haarman
+ * Copyright 2016 Niek Haarman
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,13 +35,13 @@ public class NotesScreen extends Screen<ApplicationComponent> {
     protected Presenter<?, ?> createPresenter(final int viewId) {
         if (viewId == R.id.view_notes) {
             return new NotesPresenter(
-                  applicationComponent().triad()
+                  applicationComponent.triad()
             );
         }
 
         if (viewId == R.id.view_notes_noteslistview) {
             return new NotesListPresenter(
-                  applicationComponent().noteRepository(),
+                  applicationComponent.noteRepository(),
                   (NotesListPresenter.OnNoteClickedListener) getPresenter(R.id.view_notes)
             );
         }

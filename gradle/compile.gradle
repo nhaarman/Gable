@@ -1,12 +1,12 @@
 
 task sourceJar(type: Jar) {
-  from android.sourceSets.main.java.srcDirs
   classifier = 'sources'
+  from android.sourceSets.main.java.srcDirs
 }
 
 task javadoc(type: Javadoc) {
-  source = android.sourceSets.main.java.srcDirs
-  ext.androidJar = "${android.sdkDirectory}/platforms/${android.compileSdkVersion}/android.jar"
+  source = android.sourceSets.main.java.srcDirs.findAll { it.toString().contains('java')}
+  ext.androidJar = "${android.sdkDirectory}/platforms/${project.android.compileSdkVersion}/android.jar"
   classpath += files(ext.androidJar)
 }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Niek Haarman
+ * Copyright 2016 Niek Haarman
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,6 +21,12 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import com.nhaarman.triad.ActivityComponentProvider;
+import com.nhaarman.triad.OnScreenChangedListener;
+import com.nhaarman.triad.Screen;
+import com.nhaarman.triad.ScreenProvider;
+import com.nhaarman.triad.Triad;
+import com.nhaarman.triad.TriadDelegate;
 
 /**
  * An {@link AppCompatActivity} which is the root of an application that uses Triad.
@@ -38,7 +44,7 @@ public abstract class TriadAppCompatActivity<ApplicationComponent, ActivityCompo
     private ActivityComponent mActivityComponent;
 
     public TriadAppCompatActivity() {
-        mDelegate = TriadDelegate.createFor(this);
+        mDelegate = TriadDelegate.Companion.createFor(this);
     }
 
     @Override

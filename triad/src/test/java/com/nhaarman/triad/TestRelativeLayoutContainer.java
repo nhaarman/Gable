@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Niek Haarman
+ * Copyright 2016 Niek Haarman
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,8 @@ package com.nhaarman.triad;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import com.nhaarman.triad.Container;
+import com.nhaarman.triad.Presenter;
 
 public class TestRelativeLayoutContainer extends RelativeLayoutContainer<Presenter<? extends Container, ActivityComponent>, ActivityComponent> {
 
