@@ -1,8 +1,10 @@
-project.android.compileSdkVersion rootProject.compileSdkVersion;
-project.android.buildToolsVersion rootProject.toolsVersion
+project.android.compileSdkVersion 23
+project.android.buildToolsVersion "23.0.2"
 
-project.android.defaultConfig.minSdkVersion rootProject.minSdkVersion
-project.android.defaultConfig.targetSdkVersion rootProject.targetSdkVersion
+project.android.defaultConfig.minSdkVersion 14
+project.android.defaultConfig.targetSdkVersion 23
+
+project.android.testOptions.unitTests.returnDefaultValues = true
 
 project.android.lintOptions.lintConfig file("lint.xml")
 project.android.lintOptions.textReport true

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Niek Haarman
+ * Copyright 2016 Niek Haarman
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -90,5 +90,11 @@ public abstract class ListViewContainer
         super.onDetachedFromWindow();
 
         getPresenter().releaseContainer();
+    }
+
+    @NonNull
+    @Override
+    public Context context() {
+        return getContext();
     }
 }

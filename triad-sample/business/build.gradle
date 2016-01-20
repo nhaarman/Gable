@@ -1,10 +1,10 @@
 apply plugin: 'com.android.library'
 
 dependencies {
-  provided androidAnnotations
+  provided "com.android.support:support-annotations:$androidSupportVersion"
 
   /* Tests */
-  testCompile junit
-  testCompile hamcrest
-  testCompile mockito
+  testCompile "junit:junit:$junitVersion"
+  testCompile "org.hamcrest:hamcrest-all:$hamcrestVersion"
+  testCompile "org.mockito:mockito-core:$mockitoVersion"
 }

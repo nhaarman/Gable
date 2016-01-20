@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Niek Haarman
+ * Copyright 2016 Niek Haarman
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,6 +22,8 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.widget.LinearLayout;
 import butterknife.ButterKnife;
+import com.nhaarman.triad.Container;
+import com.nhaarman.triad.Presenter;
 
 import static com.nhaarman.triad.Preconditions.checkState;
 import static com.nhaarman.triad.TriadUtil.findActivityComponent;

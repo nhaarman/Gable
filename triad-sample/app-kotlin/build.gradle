@@ -1,0 +1,46 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+
+buildscript {
+  repositories {
+    mavenCentral()
+  }
+  dependencies {
+    classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    classpath "org.jetbrains.kotlin:kotlin-android-extensions:$kotlin_version"
+  }
+}
+
+android {
+  defaultConfig {
+    testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
+  }
+
+  sourceSets {
+    main.java.srcDirs += 'src/main/kotlin'
+    test.java.srcDirs += 'src/test/kotlin'
+  }
+
+  packagingOptions {
+    exclude 'LICENSE.txt'
+  }
+}
+
+dependencies {
+  compile project(':triad-kotlin')
+  compile project(':triad-sample:business')
+
+  /* Tests */
+  testCompile project(':testutils')
+  testCompile "junit:junit:$junitVersion"
+  testCompile "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
+
+  androidTestCompile "com.android.support.test.espresso:espresso-core:$espressoVersion"
+  androidTestCompile "com.android.support.test:runner:$androidSupportTestVersion"
+  androidTestCompile "com.android.support.test:rules:$androidSupportTestVersion"
+  androidTestCompile "com.squareup.assertj:assertj-android:$assertJAndroidVersion"
+//  androidTestCompile "com.android.support.test.espresso:espresso-core:$espressoVersion"
+//  androidTestCompile "com.android.support.test:runner:$androidSupportTestVersion"
+//  androidTestCompile "com.android.support.test:rules:$androidSupportTestVersion"
+//  androidTestCompile("com.squareup.assertj:assertj-android:$assertJAndroidVersion") { exclude(group: 'com.android.support', module: 'support-annotations') }
+}

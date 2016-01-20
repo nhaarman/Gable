@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Niek Haarman
+ * Copyright 2016 Niek Haarman
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -94,8 +94,8 @@ public class BasePresenter<C extends Container, ActivityComponent> implements Pr
     /* Perform null checks to avoid unit tests from failing. */
     private Optional<Resources> resources(@NonNull final C container) {
         //noinspection ConstantConditions
-        if (container.getContext() != null && container.getContext().getResources() != null) {
-            return Optional.of(container.getContext().getResources());
+        if (container.context() != null && container.context().getResources() != null) {
+            return Optional.of(container.context().getResources());
         }
 
         return Optional.empty();

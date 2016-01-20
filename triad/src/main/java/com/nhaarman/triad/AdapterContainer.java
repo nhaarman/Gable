@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Niek Haarman
+ * Copyright 2016 Niek Haarman
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,8 @@ package com.nhaarman.triad;
 
 import android.support.annotation.NonNull;
 import android.widget.ListView;
+import com.nhaarman.triad.Container;
+import com.nhaarman.triad.Presenter;
 
 /**
  * A {@link Container} implementation for use in an adapter View, such as {@link ListView} or {@code RecyclerView}.
