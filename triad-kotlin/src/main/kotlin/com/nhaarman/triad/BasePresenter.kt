@@ -81,12 +81,12 @@ open class BasePresenter<C : Container, ActivityComponent> : Presenter<C, Activi
      * to notify implementers of this class that the [C] is no longer available.
      */
     @MainThread
-    override fun releaseContainer() {
-        if (container == null) {
+    override fun releaseContainer(container: C) {
+        if (this.container != container) {
             return
         }
 
-        container = null
+        this.container = null
         activityComponent = null
         onControlLost()
     }

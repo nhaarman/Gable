@@ -40,7 +40,7 @@ abstract class AdapterLinearLayoutContainer<P : Presenter<*, ActivityComponent>,
     @Suppress("UNCHECKED_CAST")
     override var presenter: P? = null
         set(value) {
-            field?.releaseContainer()
+            field?.let { (it as Presenter<Container, ActivityComponent>).releaseContainer(this) }
             field = value
             value?.let {
                 if (attachedToWindow) {
@@ -60,10 +60,13 @@ abstract class AdapterLinearLayoutContainer<P : Presenter<*, ActivityComponent>,
         attachedToWindow = true
     }
 
+    @Suppress("UNCHECKED_CAST")
     override fun onDetachedFromWindow() {
         super.onDetachedFromWindow()
 
-        presenter?.releaseContainer()
+        presenter?.let {
+            (it as Presenter<Container, ActivityComponent>).releaseContainer(this)
+        }
 
         attachedToWindow = false
     }

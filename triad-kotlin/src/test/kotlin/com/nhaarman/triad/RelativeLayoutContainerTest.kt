@@ -76,6 +76,6 @@ class RelativeLayoutContainerTest {
         relativeLayoutContainer.onDetachedFromWindow()
 
         /* Then */
-        verify(presenterMock).releaseContainer()
+        verify(presenterMock).releaseContainer(relativeLayoutContainer)
     }
 }

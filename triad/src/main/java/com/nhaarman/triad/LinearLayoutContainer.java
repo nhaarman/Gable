@@ -22,8 +22,6 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.widget.LinearLayout;
 import butterknife.ButterKnife;
-import com.nhaarman.triad.Container;
-import com.nhaarman.triad.Presenter;
 
 import static com.nhaarman.triad.TriadUtil.findActivityComponent;
 import static com.nhaarman.triad.TriadUtil.findPresenter;
@@ -38,13 +36,12 @@ public abstract class LinearLayoutContainer
       <P extends Presenter<?, ActivityComponent>, ActivityComponent>
       extends LinearLayout implements Container {
 
+    @NonNull
+    private final ActivityComponent mActivityComponent;
     /* Use a raw type in favor of an easier API. */
     @SuppressWarnings("rawtypes")
     @Nullable
     private Presenter mPresenter;
-
-    @NonNull
-    private final ActivityComponent mActivityComponent;
 
     public LinearLayoutContainer(@NonNull final Context context, @Nullable final AttributeSet attrs) {
         this(context, attrs, 0);
@@ -96,6 +93,7 @@ public abstract class LinearLayoutContainer
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
 
-        getPresenter().releaseContainer();
+        //noinspection rawtypes
+        ((Presenter) getPresenter()).releaseContainer(this);
     }
 }

@@ -68,10 +68,11 @@ class BasePresenterTest {
     @Test
     fun afterReleasingContainer_theContainerIsNotPresent() {
         /* Given */
-        presenter.acquire(mock(), mock())
+        val container = mock<TestRelativeLayoutContainer>()
+        presenter.acquire(container, mock())
 
         /* When */
-        presenter.releaseContainer()
+        presenter.releaseContainer(container)
 
         /* Then */
         expect(presenter.container).toBeNull()
@@ -80,10 +81,11 @@ class BasePresenterTest {
     @Test
     fun afterReleasingContainer_theActivityComponentIsNotPresent() {
         /* Given */
-        presenter.acquire(mock(), mock())
+        val container = mock<TestRelativeLayoutContainer>()
+        presenter.acquire(container, mock())
 
         /* When */
-        presenter.releaseContainer()
+        presenter.releaseContainer(container)
 
         /* Then */
         expect(presenter.activityComponent).toBeNull()
@@ -110,7 +112,7 @@ class BasePresenterTest {
         presenter.onControlGainedCalled = false
 
         /* When */
-        presenter.releaseContainer()
+        presenter.releaseContainer(container)
 
         /* Then */
         expect(presenter.onControlLostCalled).toBe(true)
@@ -149,5 +151,23 @@ class BasePresenterTest {
         /* Then */
         expect(presenter.onControlLostCalled).toBe(true)
         expect(presenter.onControlGainedCalled).toBe(true)
+    }
+
+
+    @Test
+    fun releasingADifferentContainer_doesNotCallOnControlLost() {
+        /* Given */
+        val container1 = mock<TestRelativeLayoutContainer>()
+        val container2 = mock<TestRelativeLayoutContainer>()
+
+        presenter.acquire(container1, mock())
+        presenter.onControlLostCalled = false
+        presenter.onControlGainedCalled = false
+
+        /* When */
+        presenter.releaseContainer(container2)
+
+        /* Then */
+        expect(presenter.onControlLostCalled).toBe(false)
     }
 }

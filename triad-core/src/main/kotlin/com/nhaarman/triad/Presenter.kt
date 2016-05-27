@@ -59,5 +59,5 @@ interface Presenter<C : Container, ActivityComponent> {
      * the [Container] instance supplied to [.acquire] anymore.
      */
     @MainThread
-    fun releaseContainer()
+    fun releaseContainer(container: C)
 }

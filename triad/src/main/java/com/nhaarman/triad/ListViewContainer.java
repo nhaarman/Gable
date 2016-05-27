@@ -36,13 +36,12 @@ public abstract class ListViewContainer
       <P extends Presenter<?, ActivityComponent>, ActivityComponent>
       extends ListView implements Container {
 
+    @NonNull
+    private final ActivityComponent mActivityComponent;
     /* Use a raw type in favor of an easier API. */
     @SuppressWarnings("rawtypes")
     @Nullable
     private Presenter mPresenter;
-
-    @NonNull
-    private final ActivityComponent mActivityComponent;
 
     public ListViewContainer(@NonNull final Context context, @Nullable final AttributeSet attrs) {
         this(context, attrs, 0);
@@ -89,7 +88,8 @@ public abstract class ListViewContainer
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
 
-        getPresenter().releaseContainer();
+        //noinspection rawtypes
+        ((Presenter) getPresenter()).releaseContainer(this);
     }
 
     @NonNull

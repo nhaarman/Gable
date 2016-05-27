@@ -48,7 +48,7 @@ public class BasePresenter<C extends Container, ActivityComponent> implements Pr
      * The {@link Container} this {@link BasePresenter} controls.
      */
     @NonNull
-    private Optional<C> mContainer = Optional.empty();
+    private Optional<C> mCurrentContainer = Optional.empty();
 
     @NonNull
     private Optional<Resources> mResources = Optional.empty();
@@ -65,15 +65,15 @@ public class BasePresenter<C extends Container, ActivityComponent> implements Pr
     @Override
     @MainThread
     public final void acquire(@NonNull final C container, @NonNull final ActivityComponent activityComponent) {
-        if (mContainer.isPresent() && container.equals(mContainer.get())) {
+        if (mCurrentContainer.isPresent() && container.equals(mCurrentContainer.get())) {
             return;
         }
 
-        if (mContainer.isPresent()) {
+        if (mCurrentContainer.isPresent()) {
             onControlLost();
         }
 
-        mContainer = Optional.of(container);
+        mCurrentContainer = Optional.of(container);
         mResources = resources(container);
         mActivityComponent = activityComponent;
         onControlGained(container, activityComponent);
@@ -87,7 +87,7 @@ public class BasePresenter<C extends Container, ActivityComponent> implements Pr
      */
     @VisibleForTesting
     public final void setContainer(@NonNull final C container) {
-        mContainer = Optional.of(container);
+        mCurrentContainer = Optional.of(container);
         mResources = resources(container);
     }
 
@@ -107,12 +107,12 @@ public class BasePresenter<C extends Container, ActivityComponent> implements Pr
      */
     @Override
     @MainThread
-    public final void releaseContainer() {
-        if (!mContainer.isPresent()) {
+    public final void releaseContainer(@NonNull final C container) {
+        if (!mCurrentContainer.isPresent() || !mCurrentContainer.get().equals(container)) {
             return;
         }
 
-        mContainer = Optional.empty();
+        mCurrentContainer = Optional.empty();
         mResources = Optional.empty();
         mActivityComponent = null;
         onControlLost();
@@ -150,7 +150,7 @@ public class BasePresenter<C extends Container, ActivityComponent> implements Pr
      */
     @NonNull
     public Optional<C> container() {
-        return mContainer;
+        return mCurrentContainer;
     }
 
     /**

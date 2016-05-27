@@ -37,10 +37,11 @@ abstract class LinearLayoutContainer<P : Presenter<*, ActivityComponent>, Activi
         (presenter as Presenter<Container, ActivityComponent>).acquire(this, activityComponent)
     }
 
+    @Suppress("UNCHECKED_CAST")
     override fun onDetachedFromWindow() {
         super.onDetachedFromWindow()
 
-        presenter.releaseContainer()
+        (presenter as Presenter<Container, ActivityComponent>).releaseContainer(this)
     }
 
     override final fun context() = context

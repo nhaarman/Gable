@@ -69,7 +69,7 @@ public abstract class AdapterRelativeLayoutContainer
     @Override
     public void setPresenter(@NonNull final P presenter) {
         if (mPresenter != null) {
-            mPresenter.releaseContainer();
+            mPresenter.releaseContainer(this);
         }
 
         mPresenter = presenter;
@@ -102,7 +102,7 @@ public abstract class AdapterRelativeLayoutContainer
         super.onDetachedFromWindow();
 
         if (mPresenter != null) {
-            mPresenter.releaseContainer();
+            mPresenter.releaseContainer(this);
         }
 
         mIsAttachedToWindow = false;

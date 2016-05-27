@@ -18,11 +18,6 @@ package com.nhaarman.triad;
 
 import android.app.Activity;
 import android.app.Application;
-import com.nhaarman.triad.ActivityComponentProvider;
-import com.nhaarman.triad.Presenter;
-import com.nhaarman.triad.Screen;
-import com.nhaarman.triad.ScreenProvider;
-import com.nhaarman.triad.TriadProvider;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -83,6 +78,6 @@ public class RelativeLayoutContainerTest {
         mRelativeLayoutContainer.onDetachedFromWindow();
 
         /* Then */
-        verify(mPresenterMock).releaseContainer();
+        verify(mPresenterMock).releaseContainer(mRelativeLayoutContainer);
     }
 }

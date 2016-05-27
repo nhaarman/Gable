@@ -22,8 +22,6 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.widget.LinearLayout;
 import butterknife.ButterKnife;
-import com.nhaarman.triad.Container;
-import com.nhaarman.triad.Presenter;
 
 import static com.nhaarman.triad.Preconditions.checkState;
 import static com.nhaarman.triad.TriadUtil.findActivityComponent;
@@ -71,7 +69,7 @@ public abstract class AdapterLinearLayoutContainer
     @Override
     public void setPresenter(@NonNull final P presenter) {
         if (mPresenter != null) {
-            mPresenter.releaseContainer();
+            mPresenter.releaseContainer(this);
         }
 
         mPresenter = presenter;
@@ -104,7 +102,7 @@ public abstract class AdapterLinearLayoutContainer
         super.onDetachedFromWindow();
 
         if (mPresenter != null) {
-            mPresenter.releaseContainer();
+            mPresenter.releaseContainer(this);
         }
 
         mIsAttachedToWindow = false;

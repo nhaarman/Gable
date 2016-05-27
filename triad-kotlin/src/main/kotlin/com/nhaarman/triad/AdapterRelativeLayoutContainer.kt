@@ -35,14 +35,13 @@ abstract class AdapterRelativeLayoutContainer<P : Presenter<*, ActivityComponent
     private var attachedToWindow: Boolean = false
 
     /**
-     * Returns the [P] instance that is tied to this `RelativeLayoutContainer`.
+     * Returns the [P] instance that is tied to this `AdapterRelativeLayoutContainer`.
      */
     @Suppress("UNCHECKED_CAST")
     override var presenter: P? = null
         set(value) {
-            field?.releaseContainer()
+            field?.let { (it as Presenter<Container, ActivityComponent>).releaseContainer(this) }
             field = value
-
             value?.let {
                 if (attachedToWindow) {
                     (it as Presenter<Container, ActivityComponent>).acquire(this, activityComponent)
@@ -61,10 +60,13 @@ abstract class AdapterRelativeLayoutContainer<P : Presenter<*, ActivityComponent
         attachedToWindow = true
     }
 
+    @Suppress("UNCHECKED_CAST")
     override fun onDetachedFromWindow() {
         super.onDetachedFromWindow()
 
-        presenter?.releaseContainer()
+        presenter?.let {
+            (it as Presenter<Container, ActivityComponent>).releaseContainer(this)
+        }
 
         attachedToWindow = false
     }

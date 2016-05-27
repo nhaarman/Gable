@@ -94,7 +94,8 @@ public abstract class RelativeLayoutContainer
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
 
-        getPresenter().releaseContainer();
+        //noinspection rawtypes
+        ((Presenter) getPresenter()).releaseContainer(this);
     }
 
     @NonNull

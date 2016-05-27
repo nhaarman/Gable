@@ -70,10 +70,11 @@ public class BasePresenterTest {
     @Test
     public void afterReleasingContainer_theContainerIsNotPresent() {
     /* Given */
-        mPresenter.acquire(mock(TestRelativeLayoutContainer.class), mock(ActivityComponent.class));
+        TestRelativeLayoutContainer container = mock(TestRelativeLayoutContainer.class);
+        mPresenter.acquire(container, mock(ActivityComponent.class));
 
     /* When */
-        mPresenter.releaseContainer();
+        mPresenter.releaseContainer(container);
 
     /* Then */
         assertThat(mPresenter.container().isPresent(), is(false));
@@ -82,10 +83,11 @@ public class BasePresenterTest {
     @Test
     public void afterReleasingContainer_theActivityComponentIsNotPresent() {
     /* Given */
-        mPresenter.acquire(mock(TestRelativeLayoutContainer.class), mock(ActivityComponent.class));
+        TestRelativeLayoutContainer container = mock(TestRelativeLayoutContainer.class);
+        mPresenter.acquire(container, mock(ActivityComponent.class));
 
     /* When */
-        mPresenter.releaseContainer();
+        mPresenter.releaseContainer(container);
 
     /* Then */
         assertThat(mPresenter.activityComponent().isPresent(), is(false));
@@ -112,7 +114,7 @@ public class BasePresenterTest {
         mPresenter.onControlGainedCalled = false;
 
     /* When */
-        mPresenter.releaseContainer();
+        mPresenter.releaseContainer(container);
 
     /* Then */
         assertThat(mPresenter.onControlLostCalled, is(true));
@@ -151,5 +153,22 @@ public class BasePresenterTest {
     /* Then */
         assertThat(mPresenter.onControlLostCalled, is(true));
         assertThat(mPresenter.onControlGainedCalled, is(true));
+    }
+
+    @Test
+    public void releasingADifferentContainer_doesNotCallOnControlLost() {
+       /* Given */
+        TestRelativeLayoutContainer container1 = mock(TestRelativeLayoutContainer.class);
+        TestRelativeLayoutContainer container2 = mock(TestRelativeLayoutContainer.class);
+
+        mPresenter.acquire(container1, mock(ActivityComponent.class));
+        mPresenter.onControlLostCalled = false;
+        mPresenter.onControlGainedCalled = false;
+
+    /* When */
+        mPresenter.releaseContainer(container2);
+
+    /* Then */
+        assertThat(mPresenter.onControlLostCalled, is(false));
     }
 }
